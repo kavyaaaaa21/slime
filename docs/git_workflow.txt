@@ -1,0 +1,573 @@
+GIT WORKFLOW FOR A TEAM OF 4–5 MEMBERS
+======================================
+
+INTRODUCTION
+------------
+Git is a Version Control System used to:
+1. Track code changes
+2. Collaborate with team members
+3. Avoid overwriting each other's work
+4. Maintain project history
+5. Roll back mistakes safely
+
+Most teams use Git together with GitHub, GitLab, or Bitbucket.
+
+------------------------------------------------------------
+BASIC TEAM STRUCTURE
+------------------------------------------------------------
+
+Example Team:
+- Team Lead
+- Frontend Developer
+- Backend Developer
+- QA Tester
+- DevOps/Support
+
+Recommended Branch Structure:
+- main        -> Production-ready stable code
+- develop     -> Integration branch for all features
+- feature/*   -> Individual feature branches
+- bugfix/*    -> Bug fixing branches
+- hotfix/*    -> Emergency production fixes
+
+Example:
+- feature/login-page
+- feature/payment-api
+- bugfix/navbar-error
+
+------------------------------------------------------------
+INITIAL PROJECT SETUP
+------------------------------------------------------------
+
+STEP 1: INSTALL GIT
+-------------------
+Download Git:
+https://git-scm.com/
+
+Check installation:
+    git --version
+
+What it does:
+- Verifies Git is installed correctly.
+
+------------------------------------------------------------
+
+STEP 2: CONFIGURE GIT
+---------------------
+Set username:
+    git config --global user.name "Your Name"
+
+Set email:
+    git config --global user.email "you@example.com"
+
+Check configuration:
+    git config --list
+
+What it does:
+- Git attaches your name/email to commits.
+- Helps identify who made changes.
+
+------------------------------------------------------------
+
+STEP 3: CLONE REPOSITORY
+------------------------
+Command:
+    git clone <repository-url>
+
+Example:
+    git clone https://github.com/company/project.git
+
+What it does:
+- Downloads project from GitHub to your computer.
+
+Move into project folder:
+    cd project
+
+------------------------------------------------------------
+DAILY TEAM WORKFLOW
+------------------------------------------------------------
+
+IMPORTANT RULE:
+---------------
+NEVER work directly on:
+- main branch
+- develop branch
+
+Always create your own feature branch.
+
+------------------------------------------------------------
+
+STEP 1: GET LATEST CODE
+-----------------------
+Before starting work every day:
+
+Switch to develop:
+    git checkout develop
+
+Pull latest changes:
+    git pull origin develop
+
+What it does:
+- Downloads newest code from remote repository.
+- Keeps your local project updated.
+
+------------------------------------------------------------
+
+STEP 2: CREATE FEATURE BRANCH
+-----------------------------
+Create branch:
+    git checkout -b feature/login-page
+
+What it does:
+- Creates a new branch.
+- Switches to that branch immediately.
+- Keeps your work isolated.
+
+------------------------------------------------------------
+
+STEP 3: CHECK CURRENT STATUS
+----------------------------
+Command:
+    git status
+
+What it does:
+- Shows:
+  - modified files
+  - new files
+  - deleted files
+  - staged files
+
+This is one of the MOST used Git commands.
+
+------------------------------------------------------------
+
+STEP 4: SEE CHANGES
+-------------------
+Command:
+    git diff
+
+What it does:
+- Shows exact code changes made.
+
+Useful before committing.
+
+------------------------------------------------------------
+
+STEP 5: ADD FILES TO STAGING
+----------------------------
+Add one file:
+    git add filename.js
+
+Add all files:
+    git add .
+
+What it does:
+- Moves changes to staging area.
+- Prepares files for commit.
+
+------------------------------------------------------------
+
+STEP 6: COMMIT CHANGES
+----------------------
+Command:
+    git commit -m "Added login page UI"
+
+What it does:
+- Saves snapshot of staged changes locally.
+
+Good Commit Message Examples:
+- "Added JWT authentication"
+- "Fixed navbar responsive issue"
+- "Improved API validation"
+
+Bad Examples:
+- "changes"
+- "update"
+- "fix"
+
+------------------------------------------------------------
+
+STEP 7: PUSH CODE
+-----------------
+Command:
+    git push origin feature/login-page
+
+What it does:
+- Uploads your branch to GitHub.
+
+Now team members can see your work.
+
+------------------------------------------------------------
+
+STEP 8: CREATE PULL REQUEST (PR)
+--------------------------------
+On GitHub:
+1. Open repository
+2. Click "Compare & Pull Request"
+3. Select:
+   - Base branch: develop
+   - Compare branch: feature/login-page
+4. Add description
+5. Create PR
+
+What it does:
+- Requests team review before merging.
+- Enables code review and discussion.
+
+------------------------------------------------------------
+
+STEP 9: CODE REVIEW
+-------------------
+Team Lead or teammates:
+- Review code
+- Suggest improvements
+- Approve changes
+
+Possible actions:
+- Approve
+- Request changes
+- Comment
+
+------------------------------------------------------------
+
+STEP 10: MERGE PULL REQUEST
+---------------------------
+After approval:
+- Click "Merge Pull Request"
+
+What it does:
+- Combines feature branch into develop branch.
+
+------------------------------------------------------------
+
+STEP 11: DELETE FEATURE BRANCH
+------------------------------
+Delete local branch:
+    git branch -d feature/login-page
+
+Delete remote branch:
+    git push origin --delete feature/login-page
+
+What it does:
+- Cleans up unused branches.
+
+------------------------------------------------------------
+IMPORTANT GIT COMMANDS
+------------------------------------------------------------
+
+1. CHECK CURRENT BRANCH
+-----------------------
+Command:
+    git branch
+
+What it does:
+- Shows all branches.
+- Current branch has * symbol.
+
+------------------------------------------------------------
+
+2. SWITCH BRANCH
+----------------
+Command:
+    git checkout develop
+
+What it does:
+- Moves from one branch to another.
+
+------------------------------------------------------------
+
+3. CREATE + SWITCH BRANCH
+-------------------------
+Command:
+    git checkout -b feature/dashboard
+
+What it does:
+- Creates branch
+- Switches immediately
+
+------------------------------------------------------------
+
+4. FETCH CHANGES
+----------------
+Command:
+    git fetch
+
+What it does:
+- Downloads latest remote updates.
+- Does NOT merge them.
+
+------------------------------------------------------------
+
+5. PULL CHANGES
+---------------
+Command:
+    git pull origin develop
+
+What it does:
+- Fetches + merges latest code.
+
+------------------------------------------------------------
+
+6. VIEW COMMIT HISTORY
+----------------------
+Command:
+    git log
+
+Short version:
+    git log --oneline
+
+What it does:
+- Shows project history.
+
+------------------------------------------------------------
+
+7. UNDO STAGED FILE
+-------------------
+Command:
+    git reset filename.js
+
+What it does:
+- Removes file from staging area.
+
+------------------------------------------------------------
+
+8. DISCARD FILE CHANGES
+-----------------------
+Command:
+    git checkout -- filename.js
+
+What it does:
+- Restores file to previous version.
+
+WARNING:
+- Unsaved changes are lost permanently.
+
+------------------------------------------------------------
+
+9. REMOVE FILE
+--------------
+Command:
+    git rm filename.js
+
+What it does:
+- Deletes file from Git tracking.
+
+------------------------------------------------------------
+
+10. RENAME FILE
+---------------
+Command:
+    git mv old.js new.js
+
+What it does:
+- Renames tracked file.
+
+------------------------------------------------------------
+
+11. STASH TEMPORARY CHANGES
+---------------------------
+Save work:
+    git stash
+
+Restore work:
+    git stash pop
+
+What it does:
+- Temporarily stores unfinished changes.
+
+Useful when:
+- You need to switch branches quickly.
+
+------------------------------------------------------------
+
+12. MERGE BRANCHES
+------------------
+Command:
+    git merge feature/login-page
+
+What it does:
+- Combines another branch into current branch.
+
+------------------------------------------------------------
+
+13. REBASE
+----------
+Command:
+    git rebase develop
+
+What it does:
+- Reapplies your branch changes on top of latest develop.
+
+Benefits:
+- Cleaner history.
+
+------------------------------------------------------------
+
+14. RESOLVE MERGE CONFLICTS
+---------------------------
+Conflict example:
+    <<<<<<< HEAD
+    old code
+    =======
+    new code
+    >>>>>>> branch-name
+
+How to resolve:
+1. Edit file manually
+2. Remove conflict markers
+3. Save file
+4. Add file:
+       git add .
+5. Continue merge:
+       git commit
+
+------------------------------------------------------------
+COMPLETE TEAM WORKFLOW EXAMPLE
+------------------------------------------------------------
+
+Developer A:
+-------------
+1. Pull latest develop
+2. Create feature branch
+3. Write code
+4. Commit
+5. Push
+6. Create PR
+7. Merge into develop
+
+Developer B:
+-------------
+1. Pull latest develop
+2. Create another feature branch
+3. Work independently
+4. Push changes
+5. Create PR
+
+QA Tester:
+-----------
+1. Pull develop branch
+2. Test merged features
+3. Report bugs
+
+Team Lead:
+-----------
+1. Review PRs
+2. Approve code
+3. Merge branches
+4. Maintain release stability
+
+------------------------------------------------------------
+BEST PRACTICES
+------------------------------------------------------------
+
+1. Pull latest code daily
+2. Create small commits
+3. Write meaningful commit messages
+4. Never commit secrets/passwords
+5. Never work directly on main
+6. Keep branches small and focused
+7. Delete merged branches
+8. Review code carefully
+9. Test before pushing
+10. Use .gitignore properly
+
+------------------------------------------------------------
+USEFUL .GITIGNORE EXAMPLE
+------------------------------------------------------------
+
+node_modules/
+.env
+dist/
+build/
+*.log
+
+What it does:
+- Prevents unnecessary files from being tracked.
+
+------------------------------------------------------------
+RECOMMENDED TEAM FLOW (PROFESSIONAL)
+------------------------------------------------------------
+
+main
+  |
+develop
+  |
+feature branches
+  |
+Pull Request
+  |
+Code Review
+  |
+Merge into develop
+  |
+Testing
+  |
+Merge into main
+  |
+Production Release
+
+------------------------------------------------------------
+COMMONLY USED COMMANDS SUMMARY
+------------------------------------------------------------
+
+Initialize Git:
+    git init
+
+Clone repository:
+    git clone <url>
+
+Check status:
+    git status
+
+Create branch:
+    git checkout -b branch-name
+
+Switch branch:
+    git checkout branch-name
+
+Add files:
+    git add .
+
+Commit:
+    git commit -m "message"
+
+Push:
+    git push origin branch-name
+
+Pull:
+    git pull origin develop
+
+View logs:
+    git log --oneline
+
+Merge:
+    git merge branch-name
+
+Delete branch:
+    git branch -d branch-name
+
+Stash changes:
+    git stash
+
+Restore stash:
+    git stash pop
+
+------------------------------------------------------------
+FINAL RECOMMENDATION
+------------------------------------------------------------
+
+For a 4–5 member team:
+
+Use:
+- main      -> stable production
+- develop   -> team integration
+- feature/* -> individual work
+
+Workflow:
+Feature Branch -> Pull Request -> Review -> Merge -> Test -> Release
+
+This is the standard workflow used in most software companies.
+
+============================================================
+END OF DOCUMENT
+============================================================
