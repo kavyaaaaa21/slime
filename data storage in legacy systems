@@ -1,0 +1,44 @@
+Back in the day, data storage wasn't as simple as spinning up a cloud database or plugging in a terabyte-sized NVMe SSD. Storage media was expensive, physical space was limited, and processing power was a fraction of what it is today.
+
+Because of these constraints, legacy systems relied on a mix of physical automation, flat files, and early hierarchical databases. Here is how they managed it:
+
+1. Physical and Magnetic Media (The Hardware)
+Before hard drives became cheap and ubiquitous, data was stored on physical and sequential media:
+
+Punched Cards: Popularized by IBM in the mid-20th century, these were paper cards where data was represented by the presence or absence of holes in predefined positions. A single card typically held just 80 characters (bytes) of data.
+
+Magnetic Tape: As systems grew, magnetic tape drives took over. Tapes could store significantly more data than cards, but they were sequential access. If you needed data at the end of the tape, you had to physically wind through the entire reel to get to it.
+
+Early Magnetic Disks: Devices like the IBM 350 (the first hard drive, released in 1956) were the size of two refrigerators and stored a whopping 3.75 MB of data across 50 massive platters.
+
+2. Flat File Systems
+Before actual Database Management Systems (DBMS) existed, legacy systems stored data in flat files—essentially raw text or binary files structured in specific ways.
+
+Fixed-Width Formats: Because processing power was low, files didn't use modern delimiters like commas (CSV) or tags (JSON). Instead, every record had a strict, predefined character limit. For example, the first 10 characters were always the First Name, the next 10 were the Last Name, and the next 8 were the Date of Birth.
+
+The Y2K Problem: To save precious bytes on magnetic tape and disks, programmers truncated years to two digits (e.g., "85" instead of "1985"). This optimization is exactly what caused the massive Y2K panic as the year 2000 approached.
+
+3. Early Database Models
+As applications became too complex for flat files, the first database architectures were born. These are fundamentally different from the Relational Databases (SQL) we use most often today.
+
+The Hierarchical Model (IMS)
+Developed by IBM in the late 1960s (specifically for the Apollo space program), the Information Management System (IMS) organized data in a strict tree-like structure.
+
+Data followed a parent-child relationship.
+
+A parent record could have multiple child records, but a child could only have one parent.
+
+The Catch: To access a child record, you always had to navigate down from the root parent. It was incredibly fast for specific, predictable queries, but highly inflexible if your data relationships changed.
+
+The Network Model (CODASYL)
+To fix the limitations of the hierarchical model, the network model was created.
+
+It allowed a child record to have multiple parent records (a many-to-many relationship structure).
+
+The Catch: It relied on physical "pointers" (memory addresses) embedded in the data to link records together. If you wanted to query the data, a programmer had to write complex code to manually navigate through these pointers. If a pointer broke, the data integrity collapsed.
+
+Summary of Differences: Legacy vs. Modern Storage
+Feature	Legacy Systems (e.g., Mainframes/COBOL)	Modern Systems (e.g., Cloud/SQL/NoSQL)
+Storage Cost	Extremely expensive; every byte was heavily optimized.	Incredibly cheap; optimized for developer speed and data flexibility.
+Data Access	Sequential or structural navigation (had to know the exact physical paths).	Declarative (you ask what data you want via SQL, the engine figures out how to get it).
+Flexibility	Rigid. Modifying a schema often required rewriting the entire application.	Highly flexible; schemas can be altered dynamically (or omitted entirely in NoSQL).
